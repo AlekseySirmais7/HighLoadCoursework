@@ -1,0 +1,62 @@
+Table advertiser as AD {
+  id int [pk, increment] // auto-increment
+  login varchar
+  password varchar
+  balance int
+  banner int
+}
+
+Table site as SI {
+  id int [pk, increment]
+  name varchar
+  login varchar
+  password varchar
+ }
+
+
+Table banner as BA {
+  id int
+  advertiser_id int
+  static_link varchar
+  theme int
+  merchant_name varchar
+  gender int
+  age int
+  geographic int
+  wealth int
+  is_activ int
+
+}
+
+Ref: AD.banner < BA.id
+Ref: AD.id < BA.advertiser_id
+
+
+Table show_stat as SH {
+  id_banner int
+  id_site int
+  id_advertoser int
+  show_count int
+  click_count int
+}
+
+
+Ref: SH.id_banner - BA.id
+Ref: SH.id_advertoser > AD.id
+Ref: SH.id_site > SI.id
+
+
+Table theme as TH {
+  id int
+  name varchar
+}
+
+Ref: BA.theme - TH.id
+
+
+Table geograp as GE {
+  id int
+  name varchar
+}
+
+Ref: BA.geographic - GE.id
