@@ -18,18 +18,29 @@ Table banner as BA {
   id int
   advertiser_id int
   static_link varchar
+  is_activ int
+  limit int
+  date_start date
+  date_end date
+  target int
+
+}
+
+
+Table target as TA {
+  id int
+  advertiser_id int
   theme int
-  merchant_name varchar
   gender int
   age int
   geographic int
   wealth int
-  is_activ int
-
 }
+
 
 Ref: AD.banner < BA.id
 Ref: AD.id < BA.advertiser_id
+Ref: BA.target > TA.id
 
 
 Table show_stat as SH {
@@ -51,7 +62,7 @@ Table theme as TH {
   name varchar
 }
 
-Ref: BA.theme - TH.id
+Ref: TA.theme - TH.id
 
 
 Table geograp as GE {
@@ -59,4 +70,27 @@ Table geograp as GE {
   name varchar
 }
 
-Ref: BA.geographic - GE.id
+Table users as U {
+  id int
+  id_hash int
+   theme int
+  gender int
+  age int
+  geographic int
+  wealth int
+}
+
+Table users_uniq as UU {
+  id_banner int
+  id_hash int
+  view_count int
+}
+
+Ref: TA.geographic - GE.id
+
+
+Ref: "target"."advertiser_id" > "advertiser"."id"
+
+Ref: "users_uniq"."id_banner" < "banner"."id"
+
+Ref: "users_uniq"."id_hash" < "users"."id_hash"
