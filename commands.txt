@@ -1,0 +1,9 @@
+Запуск:
+docker run --name mytarantool -d -p 3301:3301 -v /data/dir/on/host:/var/lib/tarantool tarantool/tarantool:2.6.0
+
+Консоль:
+docker exec -it mytarantool console
+
+GO:
+go run main.go
+в нагрузке на чтение указать в параметр maxValue len() из тарантула
